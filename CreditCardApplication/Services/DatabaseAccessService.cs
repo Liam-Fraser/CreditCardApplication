@@ -28,6 +28,7 @@ namespace CreditCardApplication.Services
             db.Close();
             return results;
         }
+
         public void WriteRecord(string command, SqlParameter[] parameters)
         {
             var db = new SqlConnection(connection);

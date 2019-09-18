@@ -3,16 +3,25 @@
 }
 
 <div id="application-form-container">
+    <br />
+    <h3>Apply for a Credit Card today!</h3>
     <form action="/Apply/SendApplication" method="post">
         <div style="display:flex; flex-direction:column;">
-            <label for="name">Full name:</label>
-            <input type="text" name="name" />
-            <label for="dob">Date of Birth: </label>
-            <input type="date" name="dob" />
-            <label for="dob">Salary:</label>
-            <input type="number" name="salary" />
+            <div class="form-group">
+                <label for="name">Full name:</label>
+                <input class="form-control" type="text" name="name" placeholder="Type your name here..." />
+            </div>
+            <div class="form-group">
+
+                <label for="dob">Date of Birth: </label>
+                <input class="form-control" type="date" name="dob" />
+            </div>
+            <div class="form-group">
+                <label for="dob">Salary:</label>
+                <input class="form-control" type="number" name="salary" placeholder="Annual Salary (£)" />
+            </div>
         </div>
-        <input type="submit" value="Submit Application" />
+        <input type="submit" class="btn btn-primary" value="Submit Application" title="Apply for credit card" />
     </form>
 
 </div>

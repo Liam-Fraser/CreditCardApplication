@@ -1,7 +1,9 @@
 ﻿@{
     var card = ViewData["card"] as CreditCardModel;
+    ViewData["Title"] = card.CardName;
 }
 <h1>You qualify for a @card.CardName</h1>
 <p>@card.SalesText</p>
-<i>Now available with @card.Apr% APR</i> <br />
-<img src="@card.ImageUrl"/>
+<i>Now available with @card.Apr% APR</i>
+<br />
+<img src="@card.ImageUrl" />
