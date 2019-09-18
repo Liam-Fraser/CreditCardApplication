@@ -24,7 +24,7 @@ namespace CreditCardApplication.Services
             "AND MinimumSalary <= @Salary " +
             "AND (MaximumSalary >= @Salary OR MaximumSalary = -1)";
         private readonly string RecordApplicationQuery = "" +
-            "INSERT INTO TransactionLog([User], [Date], [DOB], [CardId], [QualifiedForCard]) " +
+            "INSERT INTO TransactionLog([UserName], [Date], [DOB], [CardId], [QualifiedForCard]) " +
             "VALUES (@UserName, @Date, @Dob, @CardId, @QualifiedForCard)";
 
         public ApplicationService(DatabaseAccessService database)
@@ -36,7 +36,7 @@ namespace CreditCardApplication.Services
         {
             int ageInYears = DateTime.Today.Year - dob.Year;
             SqlParameter[] parameters = BuildCardLocationParams(salary, ageInYears);
-            var result = database.ReadRowAsJSON(FindApplicableCardQuery, 9, parameters);
+            var result = database.ReadAsJSON(FindApplicableCardQuery, parameters);
             if (result == "{}")
             {
                 return UnsuccessfulApplication(name, dob);

@@ -1,8 +1,34 @@
 ﻿
 @{
-    ViewData["Title"] = "Applications";
+    var records = ViewData["records"] as List<ApplicationRecordModel>;
 }
 
 <h2>Applications</h2>
-Under Construction
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Card Shown</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in records)
+        {
+            <tr>
+                <td>@record.UserName</td>
+                <td>@record.Date</td>
+                
+                @if (@record.CardName != null)
+                {
+                    <td>@record.CardName</td>
+                }
+                else
+                {
+                    <td>None Shown</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
 

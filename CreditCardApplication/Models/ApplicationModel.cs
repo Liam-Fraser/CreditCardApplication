@@ -9,10 +9,10 @@ namespace CreditCardApplication.Models
 {
     public class ApplicationModel
     {
-        public int id;
-        public string name;
-        public DateTime dob;
-        public DateTime date;
-        public int salary;
+        public int Id;
+        public string Username;
+        public DateTime Dob;
+        public DateTime Date;
+        public int Salary;
     }
 }

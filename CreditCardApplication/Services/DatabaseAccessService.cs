@@ -9,17 +9,25 @@ namespace CreditCardApplication.Services
     {
         private static readonly string connection = "Data Source=(localdb)\\ProjectsV13;Initial Catalog=CreditCardApplicationData;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public string ReadRowAsJSON(string command, int columnCount, SqlParameter[] parameters)
+        public string ReadAsJSON(string command, SqlParameter[] parameters)
         {
             var db = new SqlConnection(connection);
             db.Open();
             var query = new SqlCommand(command, db);
             query.Parameters.AddRange(parameters);
-            var jsonResult = ExecuteReadOneCommand(columnCount, query);
+            var jsonResult = ExecuteReadOneCommand(query);
             db.Close();
             return jsonResult;
         }
-
+        public IEnumerable<string> ReadMultipleAsJSON(string command)
+        {
+            var db = new SqlConnection(connection);
+            db.Open();
+            var query = new SqlCommand(command, db);
+            var results = ExecuteReadMultipleCommand(query);
+            db.Close();
+            return results;
+        }
         public void WriteRecord(string command, SqlParameter[] parameters)
         {
             var db = new SqlConnection(connection);
@@ -30,18 +38,34 @@ namespace CreditCardApplication.Services
             db.Close();
         }
 
-        private static string ExecuteReadOneCommand(int columnCount, SqlCommand query)
+        private static string ExecuteReadOneCommand(SqlCommand query)
         {
             var row = new Dictionary<string, object>();
             var dataReader = query.ExecuteReader();
             while (dataReader.Read())
             {
-                for (int i = 0; i < columnCount; i++)
+                for (int i = 0; i < dataReader.FieldCount; i++)
                 {
                     row.Add(dataReader.GetName(i), dataReader.GetValue(i));
                 }
             }
             return JsonConvert.SerializeObject(row);
+        }
+
+        private static List<string> ExecuteReadMultipleCommand(SqlCommand query)
+        {
+            var jsonRows = new List<string>();
+            var dataReader = query.ExecuteReader();
+            while (dataReader.Read())
+            {
+                var row = new Dictionary<string, object>();
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    row.Add(dataReader.GetName(i), dataReader.GetValue(i));
+                }
+                jsonRows.Add(JsonConvert.SerializeObject(row));
+            }
+            return jsonRows;
         }
     }
 }
