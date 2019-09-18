@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY,
 	[CardName] TEXT NOT NULL,
-	[MinimumAge] INT NOT NULL,
-	[MinimumSalary] INT NOT NULL, 
-    [MaximumSalary] INT NULL
+	[MinimumAge] INT NOT NULL DEFAULT 0,
+	[MinimumSalary] INT NOT NULL DEFAULT 0, 
+    [MaximumSalary] INT NOT NULL DEFAULT -1
 )
