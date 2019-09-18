@@ -15,7 +15,19 @@ namespace CreditCardApplication.Services
             db.Open();
             var query = new SqlCommand(command, db);
             query.Parameters.AddRange(parameters);
-            return ExecuteReadOneCommand(columnCount, query);
+            var jsonResult = ExecuteReadOneCommand(columnCount, query);
+            db.Close();
+            return jsonResult;
+        }
+
+        public void WriteRecord(string command, SqlParameter[] parameters)
+        {
+            var db = new SqlConnection(connection);
+            db.Open();
+            var sql = new SqlCommand(command, db);
+            sql.Parameters.AddRange(parameters);
+            sql.ExecuteNonQuery();
+            db.Close();
         }
 
         private static string ExecuteReadOneCommand(int columnCount, SqlCommand query)

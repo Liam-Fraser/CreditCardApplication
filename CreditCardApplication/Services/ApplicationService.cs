@@ -12,11 +12,14 @@ namespace CreditCardApplication.Services
     {
         private readonly DatabaseAccessService database;
         private readonly string FindApplicableCardQuery = "" +
-                  "SELECT TOP 1 Id, CardName, MinimumAge, MinimumSalary, MaximumSalary " +
-                  "FROM CreditCards " +
-                  "WHERE MinimumAge <= @Age " +
-                  "AND MinimumSalary <= @Salary " +
-                  "AND (MaximumSalary >= @Salary OR MaximumSalary = -1)";
+            "SELECT TOP 1 Id, CardName, MinimumAge, MinimumSalary, MaximumSalary " +
+            "FROM CreditCards " +
+            "WHERE MinimumAge <= @Age " +
+            "AND MinimumSalary <= @Salary " +
+            "AND (MaximumSalary >= @Salary OR MaximumSalary = -1)";
+        private readonly string RecordApplicationQuery = "" + 
+            "INSERT INTO TransactionLog([User], [Date], [DOB], [CardId]) " +
+            "VALUES (@UserName, @Date, @Dob, @CardId)";
 
         public ApplicationService(DatabaseAccessService database)
         {
@@ -39,8 +42,31 @@ namespace CreditCardApplication.Services
             };
 
             var result = database.ReadRowAsJSON(FindApplicableCardQuery, 5, parameters);
-            // todo: Log Application (write)
-            return JsonConvert.DeserializeObject<CreditCardModel>(result);
+            var card = JsonConvert.DeserializeObject<CreditCardModel>(result);
+            var applicationParams = new SqlParameter[] {
+                new SqlParameter {
+                    ParameterName = "@Username",
+                    Value = name
+                },
+                new SqlParameter
+                {
+                    ParameterName = "@Date",
+                    Value = DateTime.Now
+                },
+                new SqlParameter
+                {
+                    ParameterName = "@Dob",
+                    Value = dob
+                },
+                new SqlParameter
+                {
+                    ParameterName = "@CardId",
+                    Value = card.Id
+                }
+            };
+
+            database.WriteRecord(RecordApplicationQuery, applicationParams);
+            return card;
 
 
         }
