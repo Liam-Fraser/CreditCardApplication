@@ -13,5 +13,7 @@ namespace CreditCardApplication.Models
         public int MinimumSalary;
         public int MaximumSalary;
         public string ImageUrl;
+        public float Apr;
+        public string SalesText;
     }
 }

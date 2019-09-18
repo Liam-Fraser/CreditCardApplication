@@ -24,8 +24,17 @@ namespace CreditCardApplication.Controllers
         [HttpPost]
         public IActionResult SendApplication(string name, DateTime dob, int salary)
         {
-            var card = applicationService.MakeApplication(name, dob, salary);
-            return RedirectToAction("ViewCard", "Apply", new { cardId = card.Id });
+            var response = applicationService.MakeApplication(name, dob, salary);
+            if (!response.IsValidApplication)
+            {
+                return RedirectToAction("Error");
+            }
+            return RedirectToAction("ViewCard", "Apply", new { cardId = response.CardId });
+        }
+
+        public IActionResult Error()
+        {
+            return View();
         }
 
         public IActionResult ViewCard(int cardId)

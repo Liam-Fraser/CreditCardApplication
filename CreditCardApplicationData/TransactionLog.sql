@@ -4,6 +4,6 @@
 	[User] TEXT NOT NULL,
 	[Date] DATETIME NOT NULL,
     [DOB] DATE NOT NULL, 
-    [CardId] INT NOT NULL, 
-    CONSTRAINT [FK_TransactionLog_ToCreditCards] FOREIGN KEY ([CardId]) REFERENCES [CreditCards]([Id]) 
+    [CardId] INT NOT NULL,
+	[QualifiedForCard] BIT DEFAULT 1
 );

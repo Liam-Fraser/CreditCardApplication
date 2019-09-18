@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace CreditCardApplication.Services
 {
+    public class ApplicationResponse
+    {
+        public bool IsValidApplication;
+        public int CardId;
+    }
+
     public class ApplicationService
     {
         private readonly DatabaseAccessService database;
@@ -17,26 +23,39 @@ namespace CreditCardApplication.Services
             "WHERE MinimumAge <= @Age " +
             "AND MinimumSalary <= @Salary " +
             "AND (MaximumSalary >= @Salary OR MaximumSalary = -1)";
-        private readonly string RecordApplicationQuery = "" + 
-            "INSERT INTO TransactionLog([User], [Date], [DOB], [CardId]) " +
-            "VALUES (@UserName, @Date, @Dob, @CardId)";
+        private readonly string RecordApplicationQuery = "" +
+            "INSERT INTO TransactionLog([User], [Date], [DOB], [CardId], [QualifiedForCard]) " +
+            "VALUES (@UserName, @Date, @Dob, @CardId, @QualifiedForCard)";
 
         public ApplicationService(DatabaseAccessService database)
         {
             this.database = database;
         }
 
-        public CreditCardModel MakeApplication(string name, DateTime dob, int salary)
+        public ApplicationResponse MakeApplication(string name, DateTime dob, int salary)
         {
             int ageInYears = DateTime.Today.Year - dob.Year;
             SqlParameter[] parameters = BuildCardLocationParams(salary, ageInYears);
-            var result = database.ReadRowAsJSON(FindApplicableCardQuery, 6, parameters);
+            var result = database.ReadRowAsJSON(FindApplicableCardQuery, 9, parameters);
+            if (result == "{}")
+            {
+                return UnsuccessfulApplication(name, dob);
+            }
+            return SuccessfulApplication(name, dob, result);
+        }
+
+        private ApplicationResponse UnsuccessfulApplication(string name, DateTime dob)
+        {
+            database.WriteRecord(RecordApplicationQuery, BuildApplicationParams(name, dob, false));
+            return new ApplicationResponse { IsValidApplication = false };
+        }
+
+        private ApplicationResponse SuccessfulApplication(string name, DateTime dob, string result)
+        {
             var card = JsonConvert.DeserializeObject<CreditCardModel>(result);
-
-            SqlParameter[] applicationParams = BuildApplicationParams(name, dob, card);
+            var applicationParams = BuildApplicationParams(name, dob, true, card.Id);
             database.WriteRecord(RecordApplicationQuery, applicationParams);
-
-            return card;
+            return new ApplicationResponse { IsValidApplication = true, CardId = card.Id };
         }
 
         private static SqlParameter[] BuildCardLocationParams(int salary, int ageInYears)
@@ -54,7 +73,7 @@ namespace CreditCardApplication.Services
             };
         }
 
-        private static SqlParameter[] BuildApplicationParams(string name, DateTime dob, CreditCardModel card)
+        private static SqlParameter[] BuildApplicationParams(string name, DateTime dob, bool allowedCard, int creditCardId = -1)
         {
             return new SqlParameter[] {
                 new SqlParameter {
@@ -74,7 +93,12 @@ namespace CreditCardApplication.Services
                 new SqlParameter
                 {
                     ParameterName = "@CardId",
-                    Value = card.Id
+                    Value = creditCardId
+                },
+                new SqlParameter
+                {
+                    ParameterName = "@QualifiedForCard",
+                    Value = allowedCard ? 1 : 0
                 }
             };
         }

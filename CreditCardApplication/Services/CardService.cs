@@ -22,7 +22,7 @@ namespace CreditCardApplication.Services
             {
                 new SqlParameter("@CardId", cardId)
             };
-            var json = databaseAccess.ReadRowAsJSON(statement, 6, sqlParams);
+            var json = databaseAccess.ReadRowAsJSON(statement, 9, sqlParams);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CreditCardModel>(json);
         }
     }
