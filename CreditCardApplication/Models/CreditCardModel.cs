@@ -12,19 +12,6 @@ namespace CreditCardApplication.Models
         public int MinimumAge;
         public int MinimumSalary;
         public int MaximumSalary;
-
-        public CreditCardModel(
-            int id,
-            string cardName,
-            int minimumAge,
-            int minimumSalary,
-            int maximumSalary)
-        {
-            Id = id;
-            CardName = cardName;
-            MinimumAge = minimumAge;
-            MinimumSalary = minimumSalary;
-            MaximumSalary = maximumSalary;
-        }
+        public string ImageUrl;
     }
 }

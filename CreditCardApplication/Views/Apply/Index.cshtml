@@ -1,13 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "Application";
+    ViewData["Title"] = "Apply for a card";
 }
 
 <div id="application-form-container">
     <form action="/Apply/SendApplication" method="post">
-        <input type="text" name="name" />
-        <input type="date" name="dob" />
-        <input type="number" name="salary" />
-
+        <div style="display:flex; flex-direction:column;">
+            <label for="name">Full name:</label>
+            <input type="text" name="name" />
+            <label for="dob">Date of Birth: </label>
+            <input type="date" name="dob" />
+            <label for="dob">Salary:</label>
+            <input type="number" name="salary" />
+        </div>
         <input type="submit" value="Submit Application" />
     </form>
 

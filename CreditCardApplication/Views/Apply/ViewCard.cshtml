@@ -1,0 +1,5 @@
+﻿@{
+    var card = ViewData["card"] as CreditCardModel;
+}
+<h1>You qualify for a @card.CardName</h1>
+<img src="@card.ImageUrl"/>

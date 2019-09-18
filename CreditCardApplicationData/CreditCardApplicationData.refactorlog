@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CardName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="fe9bf65a-e865-47d8-a20a-a3b68f0df14d" ChangeDateTime="09/18/2019 12:03:15">
+    <Property Name="ElementName" Value="[dbo].[CreditCards].[Image]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CreditCards]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ImageUrl" />
+  </Operation>
 </Operations>

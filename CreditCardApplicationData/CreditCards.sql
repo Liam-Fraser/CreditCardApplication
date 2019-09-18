@@ -4,5 +4,6 @@
 	[CardName] TEXT NOT NULL,
 	[MinimumAge] INT NOT NULL DEFAULT 0,
 	[MinimumSalary] INT NOT NULL DEFAULT 0, 
-    [MaximumSalary] INT NOT NULL DEFAULT -1
-)
+    [MaximumSalary] INT NOT NULL DEFAULT -1, 
+    [ImageUrl] TEXT NOT NULL DEFAULT ''
+);
