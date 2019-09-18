@@ -1,9 +1,10 @@
 ﻿
 @{
     var records = ViewData["records"] as List<ApplicationRecordModel>;
+    ViewData["Title"] = "Historical Applications";
 }
 
-<h2>Applications</h2>
+<h2>Historical Applications</h2>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -18,7 +19,7 @@
             <tr>
                 <td>@record.UserName</td>
                 <td>@record.Date</td>
-                
+
                 @if (@record.CardName != null)
                 {
                     <td>@record.CardName</td>
