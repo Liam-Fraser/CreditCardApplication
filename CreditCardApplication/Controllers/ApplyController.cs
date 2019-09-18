@@ -24,12 +24,21 @@ namespace CreditCardApplication.Controllers
         [HttpPost]
         public IActionResult SendApplication(string name, DateTime dob, int salary)
         {
+            if (ApplicationDataIsInvalid(name, dob))
+            {
+                return RedirectToAction("Error");
+            }
             var response = applicationService.MakeApplication(name, dob, salary);
             if (!response.IsValidApplication)
             {
                 return RedirectToAction("Error");
             }
             return RedirectToAction("ViewCard", "Apply", new { cardId = response.CardId });
+        }
+
+        private static bool ApplicationDataIsInvalid(string name, DateTime dob)
+        {
+            return dob == DateTime.MinValue || name == "";
         }
 
         public IActionResult Error()
