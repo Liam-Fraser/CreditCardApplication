@@ -14,7 +14,7 @@ namespace CreditCardApplication.Services
         public int CardId;
     }
 
-    public class ApplicationService
+    public class ApplicationService : IApplicationService
     {
         private readonly IDatabaseAccessService database;
         private readonly string FindApplicableCardQuery = "" +

@@ -6,9 +6,9 @@ namespace CreditCardApplication.Controllers
 {
     public class ApplicationsController : Controller
     {
-        private readonly ApplicationsService applicationsService;
+        private readonly IApplicationsService applicationsService;
 
-        public ApplicationsController(ApplicationsService applicationsService) {
+        public ApplicationsController(IApplicationsService applicationsService) {
             this.applicationsService = applicationsService;
         }
 

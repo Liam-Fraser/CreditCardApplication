@@ -6,11 +6,12 @@ using System.Linq;
 
 namespace CreditCardApplication.Services
 {
-    public class ApplicationsService
+    public class ApplicationsService : IApplicationsService
     {
         private readonly IDatabaseAccessService databaseAccess;
 
-        public ApplicationsService(IDatabaseAccessService databaseAccess) {
+        public ApplicationsService(IDatabaseAccessService databaseAccess)
+        {
             this.databaseAccess = databaseAccess;
         }
 

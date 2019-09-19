@@ -3,11 +3,12 @@ using System.Data.SqlClient;
 
 namespace CreditCardApplication.Services
 {
-    public class CardService
+    public class CardService : ICardService
     {
         private readonly IDatabaseAccessService databaseAccess;
 
-        public CardService(IDatabaseAccessService databaseAccess) {
+        public CardService(IDatabaseAccessService databaseAccess)
+        {
             this.databaseAccess = databaseAccess;
         }
 

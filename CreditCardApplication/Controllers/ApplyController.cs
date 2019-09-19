@@ -6,15 +6,14 @@ namespace CreditCardApplication.Controllers
 {
     public class ApplyController : Controller
     {
-        private readonly ApplicationService applicationService;
+        private readonly IApplicationService applicationService;
+        private readonly ICardService CardService;
 
-        public ApplyController(ApplicationService applicationService, CardService cardService)
+        public ApplyController(IApplicationService applicationService, ICardService cardService)
         {
             this.applicationService = applicationService;
             CardService = cardService;
         }
-
-        public CardService CardService { get; }
 
         public IActionResult Index()
         {

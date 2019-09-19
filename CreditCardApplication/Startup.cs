@@ -35,9 +35,9 @@ namespace CreditCardApplication
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IDatabaseAccessService, DatabaseAccessService>();
-            services.AddTransient<ApplicationService, ApplicationService>();
-            services.AddTransient<ApplicationsService, ApplicationsService>();
-            services.AddTransient<CardService, CardService>();
+            services.AddTransient<IApplicationService, ApplicationService>();
+            services.AddTransient<IApplicationsService, ApplicationsService>();
+            services.AddTransient<ICardService, CardService>();
 
         }
 
