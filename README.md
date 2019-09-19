@@ -20,3 +20,7 @@
 - If the system is failing to connect to the database, locate the server in the SQL Server Object explorer, right click and copy the connection string. Replace the "connection" variable value with the copied connection string.
 
 - If you have trouble executing the "InitialiseCreditCards.sql", check that the database has been created (using the SQL Server Object Explorer in VS2019) and that the tables are empty.
+
+### Known Issues
+
+- Modifying the URL to an unkown Card ID displays the page with partial text
