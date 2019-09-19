@@ -1,17 +1,13 @@
 ﻿using CreditCardApplication.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CreditCardApplication.Services
 {
     public class CardService
     {
-        private readonly DatabaseAccessService databaseAccess;
+        private readonly IDatabaseAccessService databaseAccess;
 
-        public CardService(DatabaseAccessService databaseAccess) {
+        public CardService(IDatabaseAccessService databaseAccess) {
             this.databaseAccess = databaseAccess;
         }
 

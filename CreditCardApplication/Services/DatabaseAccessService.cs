@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace CreditCardApplication.Services
 {
-    public class DatabaseAccessService
+    public class DatabaseAccessService : IDatabaseAccessService
     {
         private static readonly string connection = "Data Source=(localdb)\\ProjectsV13;Initial Catalog=CreditCardApplicationData;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 

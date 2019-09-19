@@ -8,9 +8,9 @@ namespace CreditCardApplication.Services
 {
     public class ApplicationsService
     {
-        private readonly DatabaseAccessService databaseAccess;
+        private readonly IDatabaseAccessService databaseAccess;
 
-        public ApplicationsService(DatabaseAccessService databaseAccess) {
+        public ApplicationsService(IDatabaseAccessService databaseAccess) {
             this.databaseAccess = databaseAccess;
         }
 

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardApplication", "Cr
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CreditCardApplicationData", "CreditCardApplicationData\CreditCardApplicationData.sqlproj", "{3FC74682-20C4-47C7-A5F2-CA21DAF4E9FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardApplicationTests", "CreditCardApplicationTests\CreditCardApplicationTests.csproj", "{F59A8815-6F0E-483D-A57B-42671231173E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{3FC74682-20C4-47C7-A5F2-CA21DAF4E9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FC74682-20C4-47C7-A5F2-CA21DAF4E9FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3FC74682-20C4-47C7-A5F2-CA21DAF4E9FC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F59A8815-6F0E-483D-A57B-42671231173E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59A8815-6F0E-483D-A57B-42671231173E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59A8815-6F0E-483D-A57B-42671231173E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59A8815-6F0E-483D-A57B-42671231173E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

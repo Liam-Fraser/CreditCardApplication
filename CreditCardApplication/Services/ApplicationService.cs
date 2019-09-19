@@ -16,18 +16,19 @@ namespace CreditCardApplication.Services
 
     public class ApplicationService
     {
-        private readonly DatabaseAccessService database;
+        private readonly IDatabaseAccessService database;
         private readonly string FindApplicableCardQuery = "" +
             "SELECT TOP 1 * " +
             "FROM CreditCards " +
             "WHERE MinimumAge <= @Age " +
             "AND MinimumSalary <= @Salary " +
             "AND (MaximumSalary >= @Salary OR MaximumSalary = -1)";
+
         private readonly string RecordApplicationQuery = "" +
             "INSERT INTO TransactionLog([UserName], [Date], [DOB], [CardId], [QualifiedForCard]) " +
             "VALUES (@UserName, @Date, @Dob, @CardId, @QualifiedForCard)";
 
-        public ApplicationService(DatabaseAccessService database)
+        public ApplicationService(IDatabaseAccessService database)
         {
             this.database = database;
         }
@@ -35,7 +36,7 @@ namespace CreditCardApplication.Services
         public ApplicationResponse MakeApplication(string name, DateTime dob, int salary)
         {
             int ageInYears = DateTime.Today.Year - dob.Year;
-            SqlParameter[] parameters = BuildCardLocationParams(salary, ageInYears);
+            var parameters = BuildCardLocationParams(salary, ageInYears);
             var result = database.ReadAsJSON(FindApplicableCardQuery, parameters);
             if (result == "{}")
             {
